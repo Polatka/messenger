@@ -1,0 +1,38 @@
+name: Windows build
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run pack:dir
+      - run: node scripts/verify-package.cjs release/win-unpacked
+      - name: Package downloads
+        shell: pwsh
+        run: |
+          Compress-Archive -Path release/win-unpacked -DestinationPath release/Polatka-0.4.1-Windows-x64.zip
+          Compress-Archive -Path desktop,renderer,assets,scripts,tests,package.json,package-lock.json,README.md,QA.md -DestinationPath release/Polatka-0.4.1-Source.zip
+          Get-FileHash release/*.zip -Algorithm SHA256 | Format-Table -AutoSize | Out-File release/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Polatka-0.4.1-Windows-and-Source
+          path: |
+            release/Polatka-0.4.1-Windows-x64.zip
+            release/Polatka-0.4.1-Source.zip
+            release/SHA256SUMS.txt
+          retention-days: 14
+          if-no-files-found: error
