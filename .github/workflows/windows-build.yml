@@ -19,7 +19,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm test
-      - run: npm run pack:dir -- --config.electronDist=node_modules/electron/dist
+      - run: npm run pack:dir
       - run: node scripts/verify-package.cjs release/win-unpacked
       - name: Package downloads
         shell: pwsh
