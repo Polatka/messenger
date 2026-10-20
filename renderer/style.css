@@ -43,3 +43,59 @@ dialog input:not([type=range]):not([type=checkbox]):not([type=color]),dialog tex
 
 /* Keep the sidebar footer visible in short windows. */
 .sidebar-content{overflow-y:auto;overscroll-behavior:contain;flex-shrink:1}.brand,.space-title,.connection-box,.profile{flex-shrink:0}.sidebar .section-label,.sidebar .channel,.invite-button{flex-shrink:0}.invite-button{white-space:nowrap}
+
+/* 0.4.1 — local appearance preferences and a transparent brand mark. */
+:root{--message-font-size:14px;--panel-radius:22px;--app-background:#101a15;--base-surface:#17251d;--message-font:"Segoe UI",Arial,sans-serif}
+:root[data-theme=graphite]{--app-background:#17181c;--base-surface:#222329}
+:root[data-theme=midnight]{--app-background:#0e1525;--base-surface:#172237}
+body{background:var(--app-background)}
+.app{background:radial-gradient(ellipse at 20% 8%,rgba(var(--accent-rgb),.09),transparent 65%),var(--app-background)}
+.sidebar{background:linear-gradient(145deg,#ffffff08,#ffffff02),color-mix(in srgb,var(--base-surface) 88%,transparent);border-radius:var(--panel-radius)}
+main{background:linear-gradient(140deg,#ffffff05,#ffffff02),color-mix(in srgb,var(--base-surface) 90%,transparent);border-radius:var(--panel-radius)}
+dialog,#volumePopover,.members.open{border-radius:var(--panel-radius);background:linear-gradient(140deg,color-mix(in srgb,var(--accent) 12%,color-mix(in srgb,var(--base-surface) 92%,transparent)),color-mix(in srgb,var(--base-surface) 92%,transparent))}
+.call-card,.screen-container{border-radius:var(--panel-radius)}
+.desktop-titlebar{background:var(--app-background)}
+.brand-logo,.desktop-titlebar img{border-radius:0;box-shadow:none;object-fit:contain}
+.brand-logo{width:40px;height:40px}
+.brand{font-size:22px;gap:7px}.brand .beta{font-size:8px;letter-spacing:0;padding:3px 4px}
+.lobby-role{display:block!important;margin-top:6px;font-size:9px!important;letter-spacing:.04em!important;color:var(--accent)!important}
+.permission-note{font-size:11px;line-height:1.7;color:#b8c8bf;border-left:2px solid var(--accent);padding-left:12px;margin:17px 0}
+.permission-note:empty{display:none}
+.appearance-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.appearance-grid label{margin:12px 0}
+.range-label{display:flex;flex-direction:row;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px}
+.range-label output{color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+#settingsDialog input[type=range]{width:100%;accent-color:var(--accent);cursor:pointer;height:24px}
+:root[data-chat-font=rounded]{--message-font:"Trebuchet MS","Segoe UI",sans-serif}
+:root[data-chat-font=mono]{--message-font:Consolas,"Courier New",monospace}
+.message p,.composer input{font-size:var(--message-font-size);font-family:var(--message-font)}
+.message-body{overflow-wrap:anywhere;min-width:0}
+.message-actions{display:flex;flex-wrap:wrap;gap:5px 14px;margin-top:9px;border-top:1px solid #ffffff0a;padding-top:6px}
+.message-delete{font-size:10px;color:#a8b9ae;padding:4px 0;text-align:left}
+.message-delete:hover,.message-delete:focus-visible{color:#ffa2a2}
+.message-delete-everyone{color:#d5b1ac}
+:root[data-density=compact] .message{margin-top:8px;margin-bottom:8px;gap:7px}
+:root[data-density=compact] .message-body{padding:7px 11px}
+:root[data-density=compact] .message p{margin-top:3px;line-height:1.4}
+:root[data-density=compact] .message-actions{margin-top:4px;padding-top:2px}
+:root[data-glass=false] .sidebar,:root[data-glass=false] main,:root[data-glass=false] dialog,:root[data-glass=false] #volumePopover,:root[data-glass=false] .members.open,:root[data-glass=false] .call-controls{backdrop-filter:none;background:var(--base-surface)}
+:root[data-glass=false] dialog::backdrop{backdrop-filter:none;background:#030508c9}
+.resume-audio{display:block;margin:10px auto 0;color:var(--accent)}
+.launch-splash{inset:38px 0 0;background:radial-gradient(ellipse at center,rgba(var(--accent-rgb),.1),transparent 58%),var(--app-background);gap:13px;overflow:hidden;animation:launch-reveal 1.7s ease forwards}
+.splash-mark{width:146px;height:146px;animation:mark-arrive 1s cubic-bezier(.16,1,.3,1) both;z-index:1}
+.splash-mark img{border-radius:0;box-shadow:none;filter:drop-shadow(0 0 22px rgba(var(--accent-rgb),.18))}
+.splash-mark:before{display:none}
+.launch-splash strong{font-size:30px;letter-spacing:-1px;animation:launch-type .65s .17s both}
+.launch-splash>span{font-size:11px;letter-spacing:1px;color:#a4b6aa;animation:launch-type .65s .25s both}
+.splash-orbit{position:absolute;left:50%;top:calc(50% - 50px);width:216px;height:216px;border:1px solid rgba(var(--accent-rgb),.12);border-radius:50%;transform:translate(-50%,-50%);animation:orbit-open 1.4s ease-out both}
+.splash-orbit:after{content:'';position:absolute;inset:-22px;border:1px solid rgba(var(--accent-rgb),.05);border-radius:50%}
+.splash-progress{height:2px;width:92px;overflow:hidden;border-radius:3px;background:#ffffff0c;margin-top:14px}
+.splash-progress i{display:block;height:100%;background:var(--accent);transform-origin:left;animation:launch-progress 1.25s cubic-bezier(.2,.7,.2,1) both}
+@keyframes mark-arrive{from{opacity:0;transform:translateY(20px) scale(.88);filter:blur(7px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes launch-type{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes orbit-open{from{opacity:0;transform:translate(-50%,-50%) scale(.7)}50%{opacity:1}to{opacity:0;transform:translate(-50%,-50%) scale(1.2)}}
+@keyframes launch-progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes launch-reveal{0%,75%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
+:root[data-motion=false] .launch-splash{display:none}
+:root[data-motion=false] *, :root[data-motion=false] *:before,:root[data-motion=false] *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+@media(prefers-reduced-motion:reduce){.launch-splash{display:none}*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media(prefers-reduced-transparency:reduce){.sidebar,main,dialog,#volumePopover,.members.open,.call-controls{background:var(--base-surface);backdrop-filter:none}dialog::backdrop{backdrop-filter:none}}

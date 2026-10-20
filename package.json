@@ -1,6 +1,6 @@
 {
   "name": "polatka",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Polatka desktop P2P messenger",
   "author": "Polatka",
   "private": true,
@@ -9,7 +9,9 @@
     "start": "electron .",
     "test": "node --test tests/*.test.cjs",
     "pack:win": "electron-builder --win portable --x64",
-    "pack:dir": "electron-builder --win --x64 --dir"
+    "pack:dir": "electron-builder --win --x64 --dir",
+    "test:ui": "node scripts/regression-check.cjs",
+    "test:audio-browser": "node scripts/audio-graph-check.cjs"
   },
   "devDependencies": {
     "electron": "44.9.0",

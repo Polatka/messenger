@@ -15,7 +15,7 @@ function createWindow(){
 }
 app.whenReady().then(()=>{
  Menu.setApplicationMenu(null);
- const allowed=new Set(['index.html','style.css','app.js','audio.js','logo.jpg','transfer.js','media-store.js','features.js']);
+ const allowed=new Set(['index.html','style.css','app.js','audio.js','appearance.js','logo.png','logo.jpg','transfer.js','media-store.js','features.js']);
  protocol.handle('app',request=>{const u=new URL(request.url);const file=u.pathname.slice(1);if(u.hostname!=='polatka'||!allowed.has(file))return new Response('Not found',{status:404});return net.fetch(pathToFileURL(path.join(__dirname,'../renderer',file)).toString())});
  const ses=session.defaultSession;
  const permissions=new Set(['media','display-capture','speaker-selection','clipboard-sanitized-write']);
